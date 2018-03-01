@@ -9,11 +9,13 @@ body {
 }
 
 #background {
+	position: relative;
 	height: 500px;
 	background-image: url(../images/bg.png);
 	background-size: contain;
 	margin: 0;
 	overflow: hidden;
+	text-align: center;
 }
 
 #header, #footer {
@@ -23,14 +25,10 @@ body {
 	font-size: 44px;
 }
 
-
-
 #header {
 	color: grey;
 	text-align: right;
 }
-
-
 
 #player_time, #gunman_time {
 	color: white;
@@ -50,11 +48,42 @@ p {
 }
 
 #alone_gunman_move {
-	width: 106px;
-	height: 320px;
 	position: absolute;
-	top: 100px;
-	left: 1100px;
-	background-color: white;
+	top: 120px;
 	background: no-repeat;
+	width: 170px;
+	height: 320px;
+}
+
+#start_game {
+	font-size: 100px;
+	cursor: pointer;
+	display: inline-block;
+	margin-top: 150px;
+	color: black;
+/*	display: none;*/
+}
+
+#messages_cloud {
+	width: 200px;
+	height: 60px;
+	background-color: white;
+	position: absolute;
+	left: 350px;
+	top: 10px;
+	border-radius: 20px;
+	font-size: 50px;
+	text-align: center;
+	display: none;
+}
+
+#messages_cloud:after {
+	content: '';
+	display: inline-block;
+	border-top: 30px solid white;
+	border-right: 10px solid transparent;
+	border-left: 10px solid transparent;
+	position: absolute;
+	bottom: -30px;
+	right: 100px;
 }
