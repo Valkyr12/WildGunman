@@ -1,6 +1,6 @@
 (function gunmanMove() {
 	var elem = document.getElementById('alone_gunman_move');
-	var pos = 1100;
+	var pos = 1000;
 	var id = setInterval(frame, 10);
 	function frame () {
 		if(pos == 415) {
@@ -11,9 +11,6 @@
 		}
 	}
 })();
-
-
-
 
 
 
