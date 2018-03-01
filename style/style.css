@@ -43,3 +43,12 @@ p {
 #header p {
 	margin: 10px;
 }
+
+#alone_gunman_move {
+	width: 170px;
+	height: 320px;
+	position: absolute;
+	top: 100px;
+	left: 1100px;
+	background-color: white;
+}
