@@ -1,0 +1,45 @@
+#playing_field {
+	width: 1000px;
+	height: 500px;
+	margin: 0 auto;
+}
+
+#background {
+	height: 500px;
+	background-image: url(../images/bg.png);
+	background-size: contain;
+	margin: 0;
+}
+
+#header, #footer {
+	height: 150px;
+	background-color: black;
+	color: white;
+	font-size: 44px;
+}
+
+
+
+#header {
+	color: grey;
+	text-align: right;
+}
+
+
+
+#player_time, #gunman_time {
+	color: white;
+}
+
+#reward {
+	color: green;
+}
+
+p {
+	padding: 0;
+	margin: 0;
+}
+
+#header p {
+	margin: 10px;
+}
