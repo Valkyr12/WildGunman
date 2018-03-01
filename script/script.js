@@ -15,32 +15,37 @@
 
 
 
-Animation('alone_gunman_move', '../images/alone_gunman_move.png', styles); // вызываем функцию
+
 
 	//Параметры
 	var styles = {};
-	styles.width = '150px';
-	styles.height = '370px';
+	styles.width = '170px';
+	styles.height = '320px';
 
-	function Animation(elementId, Name, styles) {
+	(function Animation(elementId, Name, styles) {
 
 	var img = document.createElement('img');
-	var q = 0;
-	img.onload = function () {  //как только спрайт загружается
-		var el = document.getElementById('alone_gunman_move');
+	var offset = 0;
+
+	img.onload = function () {
+	 //как только спрайт загружается
+
+		var el = document.getElementById(elementId);
+		console.log(el.style.width);
 		el.style.width = styles.width;
 		el.style.height = styles.height;
-		element.style.background = "url('" + imgName + "') " + offset + "px 50%"; //меняем стили для нашего элемента
+		el.style.background = "url('" + Name + "') " + offset + "px 50%"; //меняем стили для нашего элемента
 		var i = 0;
 			interval = setInterval(function() {  //запускаем интервал
-				if (q < img.width) { //для смены позиции изображения
-					i=i+30; // если дошли до конца спрайта
+				if (offset < img.width) { //для смены позиции изображения
+					i=i-60; // если дошли до конца спрайта
 				} else {
-					i = 0; // то возвращаемся к началу
+					i = 510; // то возвращаемся к началу
 				}
-				q = 8.8*i; //сдвиг по слайду
-				el.style.background = "url('" + Name + "') " + q + "px 50%";
-			} , 1000/7) //меняем позиционирование спрайта
+				offset = 2.8333333 * i; //сдвиг по слайду
+				el.style.background = "url('" + Name + "') " + offset + "px 50%";
+			} , 1000/3) //меняем позиционирование спрайта
 		}
 		img.src = Name; //задаем имянашего спрайта
 	}
+	)('alone_gunman_move', 'images/alone_gunman_move.png', styles);
