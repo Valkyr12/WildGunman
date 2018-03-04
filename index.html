@@ -8,20 +8,44 @@
 </head>
 <body>
 	<div id="playing_field">
-		<div id="header">
-			<p>You: <span id="player_time">0.00</span></p>
-			<p>Gunman: <span id="gunman_time">0.00</span></p>
-		</div>
-		<div id="background">
+		<div id="menu">
+			<h1>WILD GUNMAN</h1>
 			<span id="start_game">START GAME</span>
-			<div id="messages_cloud">FIRE!!</div>
-			<div id="alone_gunman_move"></div>
 		</div>
-		<div id="footer">
-			<p>$ <span id="reward">0</span></p>
-			<p>REWARD</p>
-		</div>
+			<div id="header">
+				<p>You: <span id="player_time">0.00</span></p>
+				<p>Gunman: <span id="gunman_time">1.00</span></p>
+			</div>
+
+				<div id="background">
+					<div id="message_fire">FIRE!!</div>
+					<div id="message_won">YOU WON!!</div>
+					<div id="message_lost">YOU LOST!!</div>
+					<div id="message_foul"><p>FOUL!!</p></div>
+					<div id="wrapper">
+						<div id="gunman" class="remove"></div>
+						<div id="hat" class="remove"></div>
+					</div>
+				</div>
+
+			<div id="footer">
+				<p>$ <span id="reward">0</span></p>
+				<p>REWARD</p>
+			</div>
 	</div>
+
+	<audio src="audio/main.m4a" id="main" autoplay loop></audio>
+	<audio src="audio/intro.m4a" id="intro"></audio>
+	<audio src="audio/walk.m4a" id="walk"></audio>
+	<audio src="audio/wait.m4a" id="wait" loop></audio>
+	<audio src="audio/fire.m4a" id="fire"></audio>
+	<audio src="audio/shot.m4a" id="shot"></audio>
+	<audio src="audio/shot-fall.m4a" id="shot-fall"></audio>
+	<audio src="audio/lose.m4a" id="lose"></audio>
+	<audio src="audio/win.m4a" id="win"></audio>
+	<audio src="audio/foul.m4a" id="foul"></audio>
+
+
 	<script src="script/script.js"></script>
 </body>
 </html>

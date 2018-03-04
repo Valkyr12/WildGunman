@@ -1,11 +1,32 @@
 body {
-	background-color: white;
 	font-family: 'Pointedly Mad', arial;
+}
+
+h1 {
+	margin: 20px;
 }
 
 #playing_field {
 	width: 1000px;
 	margin: 0 auto;
+}
+
+#menu {
+	background-color: black;
+	width: 1000px;
+	height: 800px;
+	position: absolute;
+	z-index: 999;
+	font-size: 100px;
+	color: #9B5643;
+	text-align: center;
+	/*display: none;*/
+}
+
+#start_game {
+	font-size: 50px;
+	cursor: pointer;
+	color: #4C4589;
 }
 
 #background {
@@ -26,8 +47,9 @@ body {
 }
 
 #header {
-	color: grey;
-	text-align: right;
+	color: #6AB700;
+	text-align: center;
+
 }
 
 #player_time, #gunman_time {
@@ -47,37 +69,219 @@ p {
 	margin: 10px;
 }
 
-#alone_gunman_move {
+#wrapper {
+  width: 170px;
+  position: absolute;
+  top: 120px;
+  /*animation: move 3.5s steps(250) forwards;*/
+  left: 800px;
+}
+
+#wrapper.transition {
+	transition: 4.5s;
+	transition-timing-function: linear;
+	left: 425px;
+}
+
+#wrapper.transition-reverse {
+	transition: 4.5s;
+	transition-timing-function: linear;
+	left: 800px;
+}
+
+#gunman {
 	position: absolute;
-	top: 120px;
-	background: no-repeat;
-	width: 170px;
-	height: 320px;
+	background: url(../images/g1.png) no-repeat left top;
+  	width: 165px;
+  	height: 320px;
+  	display: none;
+  	z-index: 2;
 }
 
-#start_game {
-	font-size: 100px;
-	cursor: pointer;
-	display: inline-block;
-	margin-top: 150px;
-	color: black;
-/*	display: none;*/
+#hat {
+	width: 133px;
+	height: 40px;
+	position: absolute;
+	left: 15px;
+	background: url(../images/g1hat.png) left top;
+	z-index: 1;
 }
 
-#messages_cloud {
-	width: 200px;
+#hat.drop {
+	animation: hatg1 3s ease-in 1 forwards;
+}
+
+#gunman.walk {
+	background-position: 0px 0;
+	animation: walk 0.3s steps(3) 15;
+}
+
+#gunman.fire {
+	animation: fire 0.2s steps(2) 1 forwards;
+}
+
+#gunman.won {
+	animation: won 0.8s steps(1) 1 forwards;
+}
+
+#gunman.lost {
+	animation: gameLost 0.8s steps(2) 3 forwards;
+}
+
+#gunman.goaway {
+	transform: scaleX(-1);
+	/*animation-direction: reverse;*/
+}
+
+#background.shot {
+	animation: bkgBlink 0.1s steps(2) 4;
+}
+
+#background.shot-lose {
+	background-color: rgba(179, 14, 14, 0.96);
+    background-blend-mode: luminosity;
+}
+
+#background.foul {
+	background-color: rgba(0, 11, 255, 0.77);
+    background-blend-mode: luminosity;
+}
+
+@keyframes walk { 0% { background-position: 0px 0; } 100% { background-position: -500px 0; } }
+@keyframes fire { 0% { background-position: -500px 0; } 100% { background-position: -840px 0; } }
+@keyframes gameLost { 0% { background-position: -840px 0; } 100% { background-position: -1180px 0; } }
+@keyframes away { 0% { background-position: -500px 0; } 100% { background-position: 0px 0; } }
+@keyframes won {
+    0% {
+        top: 0;
+        background-position: -1346px;
+    }
+    10% {
+        top: -90px;
+    }
+    20% {
+        top: -80px;
+    }
+    30% {
+        top: -70px;
+    }
+
+    50% {
+        top: -60px;
+        background-position: -1520px;
+    }
+
+    70% {
+        top: -50px;
+    }
+    80% {
+        top: -30px;
+    }
+
+    90% {
+        top: -40px;
+        background-position: -1520px;
+    }
+    100% {
+        top: -50px;
+        background-position: -1520px;
+    }
+}
+
+@keyframes hatg1 {
+    0% {
+        top: 0;
+    }
+
+    10% {
+        top: -40px;
+    }
+
+    20% {
+    	top: -25px;
+    }
+
+    30% {
+        top: -40px;
+    }
+
+    40% {
+        top: -25px;
+    }
+
+    50% {
+		top: -40px;
+    }
+
+    60% {
+		top: -25px;
+    }
+
+    70% {
+    	top: 0;
+    }
+
+    80% {
+		top: 120px;
+    }
+
+	90% {
+		top: 110px;
+	}
+
+    100% {
+        top: 120px;
+    }
+}
+
+@keyframes bkgBlink {
+    from {
+        background-image: url('../images/bg.png');
+    }
+    to {
+        background-color: rgba(250, 0, 100, 0.8);
+
+        background-blend-mode: luminosity;
+    }
+}
+
+@keyframes blink {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;finish = 1;
+	}
+}
+
+
+.remove {
+	display: none !important;
+}
+
+.display {
+	display: block !important;
+}
+
+#message_foul p {
+	animation: blink 0.2s alternate infinite;
+}
+
+#message_fire, #message_won, #message_lost, #message_foul {
+	width: auto;
 	height: 60px;
 	background-color: white;
 	position: absolute;
 	left: 350px;
 	top: 10px;
+	padding: 15px 50px;
 	border-radius: 20px;
 	font-size: 50px;
 	text-align: center;
 	display: none;
 }
 
-#messages_cloud:after {
+#message_fire:after, #message_foul:after {
 	content: '';
 	display: inline-block;
 	border-top: 30px solid white;
