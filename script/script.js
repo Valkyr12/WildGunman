@@ -50,6 +50,7 @@ var finish = 0;
 function stopTime() {
 	init = 0;
 	clearTimeout(clocktimer);
+
 	msg_fire.classList.remove('display');
 	gunman.removeEventListener('click', stopTime);
 
@@ -68,6 +69,8 @@ function stopTime() {
 		foulGame();
 		return;
 	}
+
+	finalTime = 0;
 }
 
 function clearTime() {
