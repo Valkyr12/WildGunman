@@ -244,18 +244,19 @@ function goAwayFoul() {
 
 
 function restartGame() {
-
+	// debugger;
 	restart.classList.remove('remove');
 
 	restart.addEventListener('click', removeMessages);
-	restart.addEventListener('click', removeBody);
-	restart.addEventListener('click', clearTime);
 
 	// startGame();
 };
 
 function removeMessages() {
 
+	restart.classList.add('remove');
+	removeBody();
+	clearTime();
 	msg_won.classList.remove('display');
 	msg_lost.classList.remove('display');
 	msg_foul.classList.remove('display');
@@ -263,8 +264,9 @@ function removeMessages() {
 
 function removeBody() {
 	finish = 0;
-	init = 1;
+	init = 0;
 
+	gunman.classList.add('remove');
 	gunman.classList.remove('fire');
 	gunman.classList.remove('won');
 	gunman.style.cssText = '';
@@ -275,7 +277,7 @@ function removeBody() {
 	hat.classList.remove('drop');
 
 	bkg.classList.remove('shot');
-	restart.addEventListener('click', waitingStart);
+	waitingStart();
 };
 
 //Onload
