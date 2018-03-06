@@ -51,7 +51,7 @@ function stopTime() {
 	init = 0;
 	clearTimeout(clocktimer);
 
-	msg_fire.classList.remove('display');
+	// msg_fire.classList.remove('display');
 	gunman.removeEventListener('click', stopTime);
 
 	if( +finalTime > 0 && +finalTime < gunmanTime ) {
@@ -61,20 +61,25 @@ function stopTime() {
 	}
 
 	if( +finalTime > gunmanTime ) {
+		msg_fire.classList.remove('display');
 		loseGame();
 		gunman.removeEventListener('click', stopTime);
 	}
 
-	if ( finalTime == undefined ) {
-		foulGame();
-		return;
-	}
+	// if ( finalTime == undefined ) {
+	// 	msg_fire.classList.remove('display');
+	// 	foulGame();
+	// 	return;
+	// }
 
-	finalTime = 0;
+
 }
 
 function clearTime() {
 	playerTime.innerHTML = '0.00';
+	clearTimeout(clocktimer);
+	startDate = undefined;
+	finalTime = undefined;
 	// stopTime();
 }
 
@@ -97,11 +102,13 @@ function findTime() {
 
 	if( +finalTime > gunmanTime ) {
 		playerTime.innerHTML = 'OVER';
-		loseGame();
+		stopTime();
+
 		return;
 	}
 
 	clocktimer = setTimeout(findTime, 10);
+	// thisDate = undefined;
 }
 
 function startTime() {
@@ -143,9 +150,9 @@ function goingGunman() {
 
 function turnGunman() {
 
-	if ( finish == 1 ) {
-		return;
-	}
+	// if ( finish == 1 ) {
+	// 	return;
+	// }
 
 	walk.stop();
 	gunman.classList.remove('walk');
@@ -197,6 +204,9 @@ function loseGame() {
 	bkg.classList.add('shot-lose');
 	msg_lost.classList.add('display');
 	lose.play();
+	// init = 1;
+	// initFire = 0;
+	finish = 1;
 
 	goAway();
 }
@@ -213,20 +223,25 @@ function foulGame() {
 }
 
 function goAway() {
-	gunman.addEventListener('animationend', function() {
-	gunman.classList.remove('fire');
-});
+
+	// gunman.addEventListener('animationend', xyz);
+	// function xyz() {
+	// 	gunman.classList.remove('fire');
+	// }
+
 	setTimeout(function() {
 		gunman.style.backgroundPosition = '0px 0';
+		gunman.classList.remove('fire');
 		gunman.classList.remove('lost');
 		gunman.classList.add('goaway');
 		gunman.classList.add('walk');
 		wrapper.style.left = '800px';
 		wrapper.classList.add('transition-reverse');
 		finish = 1;
-	}, 3000);
+	}, 2500);
 
-	wrapper.addEventListener('transitionend', restartGame);
+	lose.addEventListener('ended', restartGame);
+	gunman.removeEventListener('animationend', xyz);
 }
 
 function goAwayFoul() {
@@ -260,23 +275,33 @@ function removeMessages() {
 	msg_won.classList.remove('display');
 	msg_lost.classList.remove('display');
 	msg_foul.classList.remove('display');
+	msg_fire.classList.remove('display');
 };
 
 function removeBody() {
-	finish = 0;
+	// finish = 0;
 	init = 0;
+	// initFire = 1;
 
 	gunman.classList.add('remove');
 	gunman.classList.remove('fire');
 	gunman.classList.remove('won');
 	gunman.style.cssText = '';
+	wrapper.style.cssText = '';
 	gunman.classList.remove('walk');
+	gunman.classList.remove('goaway');
 	wrapper.classList.remove('transition');
+	wrapper.classList.remove('transition-reverse');
 
 	hat.classList.remove('display');
 	hat.classList.remove('drop');
 
 	bkg.classList.remove('shot');
+
+	bkg.classList.remove('shot-lose');
+	bkg.classList.remove('shot-foul');
+
+	debugger;
 	waitingStart();
 };
 

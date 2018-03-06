@@ -133,7 +133,7 @@ p {
 }
 
 #gunman.lost {
-	animation: gameLost 0.8s steps(2) 3 forwards;
+	animation: gameLost 1s steps(2) 4 forwards;
 }
 
 #gunman.goaway {
