@@ -13,6 +13,11 @@ var bkg = document.getElementById('background');
 var hat = document.getElementById('hat');
 var restart = document.getElementById('restart');
 
+var reward = document.getElementById('reward');
+var wins = document.getElementById('wins');
+var lifes = document.getElementById('lifes');
+var score = document.getElementById('score');
+
 //Sounds
 var main_msc = document.getElementById('main');
 var intro = document.getElementById('intro');
@@ -29,6 +34,11 @@ var shot_fall = document.getElementById('shot-fall');
 var fireRange = getRandomInRange(1000, 3000);
 var gunmanTime = 1.00;
 var initFire = 1;
+var winCount = 0;
+var lifeCount;
+var scoreCount = 0;
+
+
 
 //Helpers
 HTMLAudioElement.prototype.stop = function() {
@@ -124,6 +134,8 @@ function startTime() {
 
 //Functions
 function startGame () {
+	lifeCount = 3;
+	lifes.innerHTML = lifeCount;
 	restart.classList.add('remove');
 	start.addEventListener('click', removeMenu);
 }
@@ -194,6 +206,8 @@ function winGame() {
 
 	hat.addEventListener('animationend', function() { win.play(); } );
 	finish = 1;
+	winCount += 1;
+	wins.innerHTML = winCount;
 
 	hat.addEventListener('animationend', restartGame);
 }
@@ -208,6 +222,9 @@ function loseGame() {
 	lose.play();
 	// init = 1;
 	// initFire = 0;
+
+	lifeCount -= 1;
+	lifes.innerHTML = lifeCount;
 	finish = 1;
 
 	goAway();
@@ -223,6 +240,8 @@ function foulGame() {
 	// init = 1;
 	initFire = 0;
 	finish = 1;
+	lifeCount -= 1;
+	lifes.innerHTML = lifeCount;
 	wait.stop();
 
 	goAway();
