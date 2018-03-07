@@ -1,9 +1,10 @@
 body {
-	font-family: 'Pointedly Mad', arial;
+	font-family: 'Smokum', cursive;
 }
 
 h1 {
 	margin: 20px;
+	font-size: 2.3em;
 }
 
 #playing_field {
@@ -23,18 +24,18 @@ h1 {
 }
 
 #start_game {
-	font-size: 50px;
+	font-size: 70px;
 	cursor: pointer;
 	color: #4C4589;
 }
 
 #restart {
-	font-size: 70px;
+	font-size: 90px;
 	cursor: pointer;
 	color: #bb671c;
 	margin-top: 230px;
 	position: absolute;
-	left: 350px;
+	left: 330px;
 	z-index: 100;
 	background-color: white;
 }
