@@ -37,7 +37,7 @@ var initFire = 1;
 var winCount = 0;
 var lifeCount;
 var scoreCount = 0;
-
+var rewardCount;
 
 
 //Helpers
@@ -48,6 +48,15 @@ HTMLAudioElement.prototype.stop = function() {
 
 function getRandomInRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function calcReward() {
+	if( winCount == 0 ) {
+		rewardCount = Math.round( 1000 / gunmanTime );
+	} else {
+		rewardCount = Math.round( 1000 * ( winCount + 1 ) ) / gunmanTime;
+	}
+	return rewardCount;
 }
 
 //Timers
@@ -154,6 +163,9 @@ function waitingStart() {
 }
 
 function goingGunman() {
+	calcReward();
+	reward.innerHTML = rewardCount;
+
 	intro.removeEventListener('ended', goingGunman);
 	walk.play();
 	wrapper.classList.add('transition');
