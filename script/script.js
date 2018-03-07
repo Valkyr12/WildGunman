@@ -59,6 +59,21 @@ function calcReward() {
 	return rewardCount;
 }
 
+function calcScores() {
+	var total, zero, place = +score.innerHTML;
+	place += +rewardCount;
+
+	if ( place < 10000 ) {
+		zero = '00';
+	} else if ( place >= 10000 && place < 100000 ) {
+		zero = '0';
+	} else if ( place >= 100000 ) {
+		zero = '';
+	}
+
+	score.innerHTML = zero + place;
+}
+
 //Timers
 var init = 0;
 var startDate;
@@ -220,6 +235,8 @@ function winGame() {
 	finish = 1;
 	winCount += 1;
 	wins.innerHTML = winCount;
+	// debugger;
+	calcScores();
 
 	hat.addEventListener('animationend', restartGame);
 }
