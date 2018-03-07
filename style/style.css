@@ -29,13 +29,14 @@ h1 {
 }
 
 #restart {
-	font-size: 50px;
+	font-size: 70px;
 	cursor: pointer;
-	color: orange;
+	color: #bb671c;
 	margin-top: 230px;
 	position: absolute;
 	left: 350px;
 	z-index: 100;
+	background-color: white;
 }
 
 #background {
