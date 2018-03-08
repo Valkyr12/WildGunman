@@ -210,13 +210,25 @@ function removeMenu() {
 	start.removeEventListener('click', removeMenu);
 	main_msc.stop();
 	menu.classList.add('remove');
-	waitingStart();
+	firstStart();
 }
 
-function waitingStart() {
+function firstStart() {
 	initFire = 1;
 	intro.play();
 	intro.addEventListener('ended', goingGunman);
+}
+
+function waitingStart() {
+
+	initFire = 1;
+	var xxxxx = function(){
+		if( GAMEOVER == 1 ) {
+			return;
+		} else {
+			setTimeout(goingGunman, 2000);
+		}
+	}();
 }
 
 function goingGunman() {
@@ -274,7 +286,6 @@ function winGame() {
 	hat.classList.add('display');
 	hat.classList.add('drop');
 	gunman.classList.add('won');
-
 	hat.addEventListener('animationend', function() { win.play(); } );
 	finish = 1;
 	winCount += 1;
@@ -342,10 +353,10 @@ function goAway() {
 		wrapper.style.left = '800px';
 		wrapper.classList.add('transition-reverse');
 		finish = 1;
+		wrapper.addEventListener('transitionend', removeMessages);
 	}, 2500);
 
 	lose.addEventListener('ended', restartGame);
-	wrapper.addEventListener('transitionend', restartGame);
 }
 
 // function goAwayFoul() {
@@ -363,19 +374,21 @@ function goAway() {
 
 
 function restartGame() {
-	// debugger;
+
 	checkLifes();
 	if( GAMEOVER == 1 ) {
 		return;
 	}
 
-	restart.classList.add('display');
+	// restart.classList.add('display');
 
-	restart.addEventListener('click', removeMessages);
+	win.addEventListener('ended', removeMessages);
 	wrapper.removeEventListener('transitionend', restartGame);
 	lose.removeEventListener('ended', restartGame);
 
-	// startGame();
+	wrapper.addEventListener('transitionend', removeMessages);
+	lose.addEventListener('ended', removeMessages);
+
 };
 
 function removeMessages() {
@@ -387,6 +400,13 @@ function removeMessages() {
 	msg_lost.classList.remove('display');
 	msg_foul.classList.remove('display');
 	msg_fire.classList.remove('display');
+// debugger;
+	wrapper.addEventListener('transitionend', checkLifes);
+
+	wrapper.removeEventListener('transitionend', removeMessages);
+	lose.removeEventListener('ended', removeMessages);
+
+	waitingStart();
 };
 
 function removeBody() {
@@ -413,11 +433,6 @@ function removeBody() {
 	bkg.classList.remove('shot-lose');
 	bkg.classList.remove('shot-foul');
 
-	if( GAMEOVER != 1 ) {
-		waitingStart();
-	} else {
-		return;
-	}
 };
 
 function resetCounters() {
@@ -435,7 +450,7 @@ function finishGame() {
 	GAMEOVER = 1;
 
 	restart.classList.add('remove');
-	restart.removeEventListener('click', removeMessages);
+	removeMessages();
 	wrapper.removeEventListener('transitionend', restartGame);
 	lose.removeEventListener('ended', restartGame);
 
