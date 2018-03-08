@@ -43,8 +43,6 @@ var scoreCount = 0;
 var rewardCount;
 var GAMEOVER;
 
-
-
 //Helpers
 HTMLAudioElement.prototype.stop = function() {
 	this.pause();
@@ -84,12 +82,6 @@ function calcScores() {
 	score.innerHTML = zero + place;
 }
 
-// function calcGunmanTime() {
-// 	gunmanTime = (0.95 * 10 - (0.15 * winCount) * 10) / 10;
-// 	// gunmanTime.toFixed(2);
-// 	gnmTime.innerHTML = gunmanTime;
-// }
-
 //Получаем выремя выстрела бандита
 function calcGunmanTime() {
 	var gunmanShotTimes = [ 1.5, 1.3, 1, 0.9, 0.7, 0.5, 0.3 ];
@@ -118,7 +110,6 @@ function stopTime() {
 	init = 0;
 	clearTimeout(clocktimer);
 
-	// msg_fire.classList.remove('display');
 	gunman.removeEventListener('click', stopTime);
 
 	if( +finalTime > 0 && +finalTime < gunmanTime ) {
@@ -137,10 +128,7 @@ function stopTime() {
 
 		msg_fire.classList.remove('display');
 		foulGame();
-
 	}
-
-
 }
 
 function clearTime() {
@@ -176,7 +164,6 @@ function findTime() {
 	}
 
 	clocktimer = setTimeout(findTime, 10);
-	// thisDate = undefined;
 }
 
 function startTime() {
@@ -222,7 +209,7 @@ function firstStart() {
 function waitingStart() {
 
 	initFire = 1;
-	var xxxxx = function(){
+	var outputDelay = function(){
 		if( GAMEOVER == 1 ) {
 			return;
 		} else {
@@ -246,10 +233,6 @@ function goingGunman() {
 }
 
 function turnGunman() {
-
-	// if ( finish == 1 ) {
-	// 	return;
-	// }
 
 	walk.stop();
 	gunman.classList.remove('walk');
@@ -290,7 +273,6 @@ function winGame() {
 	finish = 1;
 	winCount += 1;
 	wins.innerHTML = winCount;
-	// debugger;
 	calcScores();
 
 	hat.addEventListener('animationend', restartGame);
@@ -304,8 +286,6 @@ function loseGame() {
 	bkg.classList.add('shot-lose');
 	msg_lost.classList.add('display');
 	lose.play();
-	// init = 1;
-	// initFire = 0;
 
 	lifeCount -= 1;
 
@@ -322,7 +302,7 @@ function foulGame() {
 	gunman.classList.add('lost');
 	bkg.classList.add('foul');
 	msg_foul.classList.add('display');
-	// init = 1;
+
 	initFire = 0;
 	finish = 1;
 	lifeCount -= 1;
@@ -334,7 +314,6 @@ function foulGame() {
 }
 
 function checkLifes() {
-	// debugger;
 	if( lifeCount <= 0 ) {
 		finishGame();
 	}
@@ -343,7 +322,6 @@ function checkLifes() {
 }
 
 function goAway() {
-
 	setTimeout(function() {
 		gunman.style.backgroundPosition = '0px 0';
 		gunman.classList.remove('fire');
@@ -359,28 +337,11 @@ function goAway() {
 	lose.addEventListener('ended', restartGame);
 }
 
-// function goAwayFoul() {
-// 	gunman.style.backgroundPosition = '0px 0';
-// 	gunman.classList.remove('lost');
-// 	gunman.classList.add('goaway');
-// 	gunman.classList.add('walk');
-// 	wrapper.style.left = '800px';
-// 	wrapper.classList.add('transition-reverse');
-// 	finish = 1;
-
-// 	wrapper.addEventListener('transitionend', restartGame);
-// }
-
-
-
 function restartGame() {
-
 	checkLifes();
 	if( GAMEOVER == 1 ) {
 		return;
 	}
-
-	// restart.classList.add('display');
 
 	win.addEventListener('ended', removeMessages);
 	wrapper.removeEventListener('transitionend', restartGame);
@@ -410,9 +371,7 @@ function removeMessages() {
 };
 
 function removeBody() {
-	// finish = 0;
 	init = 0;
-	// initFire = 1;
 
 	gunman.classList.add('remove');
 	gunman.classList.remove('fire');
@@ -457,7 +416,6 @@ function finishGame() {
 	msg_lost.classList.remove('display');
 	msg_foul.classList.remove('display');
 	msg_over.classList.add('display');
-
 
 	removeBody();
 	gameover.play();
