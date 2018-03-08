@@ -59,13 +59,14 @@ function getRandom(min, max) {
   return Math.random() * (max - min + 1) + min;
 }
 
+function roundTo100(num) {
+	return Math.round( num / 100 ) * 100;
+}
+
 function calcReward() {
-	if( winCount == 0 ) {
-		rewardCount = Math.floor( 1000 / gunmanTime );
-	} else {
-		rewardCount = Math.floor( 1000 * ( winCount + 1 )  / gunmanTime);
-	}
-	return rewardCount;
+	rewardCount = Math.floor( 2000 / gunmanTime );
+
+	rewardCount = roundTo100(rewardCount);
 }
 
 function calcScores() {
