@@ -44,6 +44,7 @@ var rewardCount;
 var GAMEOVER;
 
 
+
 //Helpers
 HTMLAudioElement.prototype.stop = function() {
 	this.pause();
@@ -82,10 +83,27 @@ function calcScores() {
 	score.innerHTML = zero + place;
 }
 
+// function calcGunmanTime() {
+// 	gunmanTime = (0.95 * 10 - (0.15 * winCount) * 10) / 10;
+// 	// gunmanTime.toFixed(2);
+// 	gnmTime.innerHTML = gunmanTime;
+// }
+
+//Получаем выремя выстрела бандита
 function calcGunmanTime() {
-	gunmanTime = (0.95 * 10 - (0.15 * winCount) * 10) / 10;
-	// gunmanTime.toFixed(2);
-	gnmTime.innerHTML = gunmanTime;
+	var gunmanShotTimes = [ 1.5, 1.3, 1, 0.9, 0.7, 0.5, 0.3 ];
+	var excludeST = [ 2 ];
+	var filteredST = [];
+
+	for (var i = 0; i < gunmanShotTimes.length; i++) {
+  		if (excludeST.indexOf(gunmanShotTimes[i]) === -1) {
+   			filteredST.push(gunmanShotTimes[i]);
+  		}
+	}
+
+	gunmanTime = filteredST[Math.floor(Math.random() * filteredST.length)];
+	var fixedTime = gunmanTime.toFixed(2);
+	gnmTime.innerHTML = fixedTime;
 }
 
 //Timers
