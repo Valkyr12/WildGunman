@@ -8,6 +8,7 @@ var msg_fire = document.getElementById('message_fire');
 var msg_won = document.getElementById('message_won');
 var msg_lost = document.getElementById('message_lost');
 var msg_foul = document.getElementById('message_foul');
+var msg_over = document.getElementById('message_gameover');
 var playerTime = document.getElementById('player_time');
 var bkg = document.getElementById('background');
 var hat = document.getElementById('hat');
@@ -17,6 +18,7 @@ var reward = document.getElementById('reward');
 var wins = document.getElementById('wins');
 var lifes = document.getElementById('lifes');
 var score = document.getElementById('score');
+var gnmTime = document.getElementById('gunman_time');
 
 //Sounds
 var main_msc = document.getElementById('main');
@@ -29,15 +31,17 @@ var lose = document.getElementById('lose');
 var foul = document.getElementById('foul');
 var shot = document.getElementById('shot');
 var shot_fall = document.getElementById('shot-fall');
+var gameover = document.getElementById('gameover');
 
 //Variables
 var fireRange = getRandomInRange(1000, 3000);
-var gunmanTime = 1.00;
+var gunmanTime;
 var initFire = 1;
 var winCount = 0;
 var lifeCount;
 var scoreCount = 0;
 var rewardCount;
+var GAMEOVER;
 
 
 //Helpers
@@ -50,11 +54,15 @@ function getRandomInRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function getRandom(min, max) {
+  return Math.random() * (max - min + 1) + min;
+}
+
 function calcReward() {
 	if( winCount == 0 ) {
-		rewardCount = Math.round( 1000 / gunmanTime );
+		rewardCount = Math.floor( 1000 / gunmanTime );
 	} else {
-		rewardCount = Math.round( 1000 * ( winCount + 1 ) ) / gunmanTime;
+		rewardCount = Math.floor( 1000 * ( winCount + 1 )  / gunmanTime);
 	}
 	return rewardCount;
 }
@@ -72,6 +80,12 @@ function calcScores() {
 	}
 
 	score.innerHTML = zero + place;
+}
+
+function calcGunmanTime() {
+	gunmanTime = (0.95 * 10 - (0.15 * winCount) * 10) / 10;
+	// gunmanTime.toFixed(2);
+	gnmTime.innerHTML = gunmanTime;
 }
 
 //Timers
@@ -160,8 +174,17 @@ function startTime() {
 function startGame () {
 	lifeCount = 3;
 	lifes.innerHTML = lifeCount;
-	restart.classList.add('remove');
 	start.addEventListener('click', removeMenu);
+}
+
+function startNewGame() {
+	startGame();
+	clearTime();
+	resetCounters();
+	menu.classList.remove('remove');
+	msg_over.classList.remove('display');
+	main_msc.play();
+	GAMEOVER = 0;
 }
 
 function removeMenu() {
@@ -178,6 +201,8 @@ function waitingStart() {
 }
 
 function goingGunman() {
+
+	calcGunmanTime();
 	calcReward();
 	reward.innerHTML = rewardCount;
 
@@ -253,6 +278,7 @@ function loseGame() {
 	// initFire = 0;
 
 	lifeCount -= 1;
+
 	lifes.innerHTML = lifeCount;
 	finish = 1;
 
@@ -270,10 +296,20 @@ function foulGame() {
 	initFire = 0;
 	finish = 1;
 	lifeCount -= 1;
+
 	lifes.innerHTML = lifeCount;
 	wait.stop();
 
 	goAway();
+}
+
+function checkLifes() {
+	// debugger;
+	if( lifeCount <= 0 ) {
+		finishGame();
+	}
+
+	return;
 }
 
 function goAway() {
@@ -309,7 +345,12 @@ function goAway() {
 
 function restartGame() {
 	// debugger;
-	restart.classList.remove('remove');
+	checkLifes();
+	if( GAMEOVER == 1 ) {
+		return;
+	}
+
+	restart.classList.add('display');
 
 	restart.addEventListener('click', removeMessages);
 	wrapper.removeEventListener('transitionend', restartGame);
@@ -320,7 +361,7 @@ function restartGame() {
 
 function removeMessages() {
 
-	restart.classList.add('remove');
+	restart.classList.remove('display');
 	removeBody();
 	clearTime();
 	msg_won.classList.remove('display');
@@ -353,8 +394,44 @@ function removeBody() {
 	bkg.classList.remove('shot-lose');
 	bkg.classList.remove('shot-foul');
 
-	waitingStart();
+	if( GAMEOVER != 1 ) {
+		waitingStart();
+	} else {
+		return;
+	}
 };
+
+function resetCounters() {
+	winCount = 0;
+	rewardCount = 0;
+	scoreCount = 0;
+
+	reward.innerHTML = '0';
+	score.innerHTML = '000000';
+	wins.innerHTML = '0';
+	gnmTime.innerHTML = '0.00';
+}
+
+function finishGame() {
+	GAMEOVER = 1;
+
+	restart.classList.add('remove');
+	restart.removeEventListener('click', removeMessages);
+	wrapper.removeEventListener('transitionend', restartGame);
+	lose.removeEventListener('ended', restartGame);
+
+	msg_lost.classList.remove('display');
+	msg_foul.classList.remove('display');
+	msg_over.classList.add('display');
+
+
+	removeBody();
+	gameover.play();
+
+	gameover.addEventListener('ended', startNewGame);
+
+	return GAMEOVER;
+}
 
 //Onload
 window.onload = startGame();

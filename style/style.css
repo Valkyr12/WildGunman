@@ -49,6 +49,7 @@ p span {
 	left: 330px;
 	z-index: 100;
 	background-color: white;
+	display: none;
 }
 
 #background {
@@ -288,7 +289,7 @@ p span {
 	animation: blink 0.2s alternate infinite;
 }
 
-#message_fire, #message_won, #message_lost, #message_foul {
+#message_fire, #message_won, #message_lost, #message_foul, #message_gameover {
 	width: auto;
 	height: 60px;
 	background-color: white;
