@@ -89,8 +89,28 @@ function calcScores() {
 //Получаем время выстрела бандита
 function calcGunmanTime() {
 	var gunmanShotTimes = [ 1.5, 1.3, 1, 0.9, 0.7, 0.5, 0.3 ];
-	var excludeST = [ 2 ];
+	var excludeST = [];
 	var filteredST = [];
+
+	if ( gunmanNumber == 1 ) {
+		excludeST = [0.7, 0.5, 0.3];
+	}
+
+	if ( gunmanNumber == 2 ) {
+		excludeST = [1.5, 0.3];
+	}
+
+	if ( gunmanNumber == 3 ) {
+		excludeST = [1.5, 0.3];
+	}
+
+	if ( gunmanNumber == 4 ) {
+		excludeST = [1.5, 1.3];
+	}
+
+	if ( gunmanNumber == 5 ) {
+		excludeST = [1.5, 1.3, 1, 0.9];
+	}
 
 	for (var i = 0; i < gunmanShotTimes.length; i++) {
   		if (excludeST.indexOf(gunmanShotTimes[i]) === -1) {

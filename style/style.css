@@ -262,7 +262,7 @@ hr {
 }
 
 #gunman.won4 {
-	animation: won4 2.0s steps(1) 1 forwards;
+	animation: won4 1.3s steps(1) 1 forwards;
 }
 
 #gunman.lost4 {
@@ -288,7 +288,7 @@ hr {
 }
 
 #gunman.won5 {
-	animation: won5 2.0s steps(1) 1 forwards;
+	animation: won5 1.3s steps(1) 1 forwards;
 }
 
 #gunman.lost5 {
@@ -335,7 +335,6 @@ hr {
 @keyframes fire4 { 0% { background-position: 0px 0; } 0.0001% { background-position: -510px 0 } 100% { background-position: -680px 0; } }
 @keyframes gameLost4 { 0% { background-position: -680px 0; } 100% { background-position: -1018px 0; } }
 @keyframes away4 { 0% { background-position: -510px 0; } 100% { background-position: 0px 0; } }
-@keyframes won4 { 0% { background-position: -1190px 0} 100% { background-position: -1190px 0 } }
 
 @keyframes walk5 { 0% { background-position: 0px 0; } 100% { background-position: -466px 0; } }
 @keyframes fire5 { 0% { background-position: 0px 0; } 0.0001% { background-position: -463px 0 } 100% { background-position: -624px 0; } }
@@ -381,25 +380,17 @@ hr {
 
 @keyframes won4 {
     0% {
-        top: 0;
+        top: -80px;
         background-position: -1190px;
     }
-    10% {
-        top: -90px;
-    }
     20% {
-        top: -80px;
+        top: -130px;
     }
     30% {
-        top: -70px;
+        top: -80px;
     }
 
     50% {
-        top: -60px;
-        background-position: -1190px;
-    }
-
-    70% {
         top: -50px;
     }
     80% {
@@ -408,7 +399,6 @@ hr {
 
     90% {
         top: -40px;
-        background-position: -1190px;
     }
     100% {
         top: -50px;
@@ -445,7 +435,6 @@ hr {
 
     90% {
         top: -40px;
-        background-position: -1234px;
     }
     100% {
         top: -50px;
@@ -504,14 +493,19 @@ hr {
         top: -30px;
     }
 
-    40% {
-    	top: -120px;
-		left: 280px;
+    20% {
+    	top: -60px;
+    	left: 125px;
     }
 
-    60% {
-        top: -50px;
-		left: 370px;
+    30% {
+    	top: -60px;
+		left: 200px;
+    }
+
+    50% {
+        top: 40px;
+		left: 330px;
     }
 
     100% {
