@@ -30,6 +30,7 @@ var win = document.getElementById('win');
 var lose = document.getElementById('lose');
 var foul = document.getElementById('foul');
 var shot = document.getElementById('shot');
+var shot_alt = document.getElementById('shot-alt');
 var shot_fall = document.getElementById('shot-fall');
 var gameover = document.getElementById('gameover');
 
@@ -42,6 +43,8 @@ var lifeCount;
 var scoreCount = 0;
 var rewardCount;
 var GAMEOVER;
+// var gunmanSprite = [ 1, 2, 3, 4, 5 ];
+var gunmanNumber = 1;
 
 //Helpers
 HTMLAudioElement.prototype.stop = function() {
@@ -112,8 +115,12 @@ function stopTime() {
 
 	gunman.removeEventListener('click', stopTime);
 
-	if( +finalTime > 0 && +finalTime < gunmanTime ) {
-		shot_fall.play();
+	if( +finalTime > 0 && +finalTime <= gunmanTime ) {
+		if ( gunmanNumber == 2 || gunmanNumber == 3 ) {
+			shot_alt.play();
+		} else {
+			shot_fall.play();
+		}
 		winGame();
 		bkg.classList.add('shot');
 	}
@@ -178,6 +185,7 @@ function startTime() {
 
 //Functions
 function startGame () {
+	gunman.style.background = 'url(images/g' + gunmanNumber + '.png) left top';
 	lifeCount = 3;
 	lifes.innerHTML = lifeCount;
 	start.addEventListener('click', removeMenu);
@@ -219,15 +227,19 @@ function waitingStart() {
 }
 
 function goingGunman() {
+	gunman.classList.add('g' + gunmanNumber +'w');
+	gunman.style.background = 'url(../images/g' + gunmanNumber + '.png) no-repeat left top;'
 
 	calcGunmanTime();
 	calcReward();
+
 	reward.innerHTML = rewardCount;
 
 	intro.removeEventListener('ended', goingGunman);
 	walk.play();
+
 	wrapper.classList.add('transition');
-	gunman.classList.add('walk');
+	gunman.classList.add('walk' + gunmanNumber);
 	gunman.classList.remove('remove');
 	wrapper.addEventListener('transitionend', turnGunman);
 }
@@ -235,11 +247,17 @@ function goingGunman() {
 function turnGunman() {
 
 	walk.stop();
-	gunman.classList.remove('walk');
+	gunman.classList.add('cursor');
+	gunman.classList.remove('walk' + gunmanNumber);
 	wrapper.removeEventListener('transitionend', turnGunman);
 
-	gunman.style.backgroundPosition = '-500px 0';
-	gunman.classList.remove('walk');
+	if ( gunmanNumber == 1 ) {
+		gunman.style.backgroundPosition = '-500px 0';
+	} else if ( gunmanNumber == 2 ) {
+		gunman.style.backgroundPosition = '0px 0';
+	}
+
+	gunman.classList.remove('walk' + gunmanNumber);
 
 	gunman.addEventListener('click', stopTime);
 	wait.play();
@@ -253,7 +271,7 @@ function getFire() {
 		fire.play();
 
 		msg_fire.classList.add('display');
-		gunman.classList.add('fire');
+		gunman.classList.add('fire' + gunmanNumber);
 
 		startTime();
 
@@ -265,11 +283,21 @@ function getFire() {
 //Game results
 function winGame() {
 	msg_won.classList.add('display');
-	gunman.style.background = 'url(images/g1.png) left top';
+	gunman.style.background = 'url(images/g' + gunmanNumber + '.png) left top';
+
 	hat.classList.add('display');
-	hat.classList.add('drop');
-	gunman.classList.add('won');
-	hat.addEventListener('animationend', function() { win.play(); } );
+	hat.classList.add('drop' + gunmanNumber);
+
+	if ( gunmanNumber == 2 ) {
+		hat.classList.add('unvisible');
+	}
+
+	gunman.classList.add('won' + gunmanNumber);
+
+	hat.addEventListener('animationend', function () {
+		win.play();
+	});
+
 	finish = 1;
 	winCount += 1;
 	wins.innerHTML = winCount;
@@ -280,9 +308,9 @@ function winGame() {
 
 function loseGame() {
 	shot.play();
-	gunman.classList.remove('walk');
+	gunman.classList.remove('walk' + gunmanNumber);
 	gunman.style.backgroundPosition = '-840px 0';
-	gunman.classList.add('lost');
+	gunman.classList.add('lost' + gunmanNumber);
 	bkg.classList.add('shot-lose');
 	msg_lost.classList.add('display');
 	lose.play();
@@ -297,9 +325,9 @@ function loseGame() {
 
 function foulGame() {
 	foul.play();
-	gunman.classList.remove('walk');
+	gunman.classList.remove('walk' + gunmanNumber);
 	gunman.style.backgroundPosition = '-840px 0';
-	gunman.classList.add('lost');
+	gunman.classList.add('lost' + gunmanNumber);
 	bkg.classList.add('foul');
 	msg_foul.classList.add('display');
 
@@ -324,16 +352,17 @@ function checkLifes() {
 function goAway() {
 	setTimeout(function() {
 		gunman.style.backgroundPosition = '0px 0';
-		gunman.classList.remove('fire');
-		gunman.classList.remove('lost');
+		gunman.classList.remove('fire' + gunmanNumber);
+		gunman.classList.remove('lost' + gunmanNumber);
 		gunman.classList.add('goaway');
-		gunman.classList.add('walk');
+		gunman.classList.add('walk' + gunmanNumber);
 		wrapper.style.left = '800px';
 		wrapper.classList.add('transition-reverse');
 		finish = 1;
 		wrapper.addEventListener('transitionend', removeMessages);
 	}, 2500);
 
+	gunman.classList.remove('cursor');
 	lose.addEventListener('ended', restartGame);
 }
 
@@ -343,13 +372,13 @@ function restartGame() {
 		return;
 	}
 
+	hat.removeEventListener('animationend', restartGame);
 	win.addEventListener('ended', removeMessages);
 	wrapper.removeEventListener('transitionend', restartGame);
 	lose.removeEventListener('ended', restartGame);
 
 	wrapper.addEventListener('transitionend', removeMessages);
 	lose.addEventListener('ended', removeMessages);
-
 };
 
 function removeMessages() {
@@ -363,6 +392,7 @@ function removeMessages() {
 	msg_fire.classList.remove('display');
 // debugger;
 	wrapper.addEventListener('transitionend', checkLifes);
+	hat.classList.remove('unvisible');
 
 	wrapper.removeEventListener('transitionend', removeMessages);
 	lose.removeEventListener('ended', removeMessages);
@@ -372,19 +402,19 @@ function removeMessages() {
 
 function removeBody() {
 	init = 0;
-
 	gunman.classList.add('remove');
-	gunman.classList.remove('fire');
-	gunman.classList.remove('won');
+	gunman.classList.remove('fire' + gunmanNumber);
+	gunman.classList.remove('won' + gunmanNumber);
 	gunman.style.cssText = '';
 	wrapper.style.cssText = '';
-	gunman.classList.remove('walk');
+	gunman.classList.remove('walk' + gunmanNumber);
 	gunman.classList.remove('goaway');
+	gunman.classList.remove('g' + gunmanNumber +'w');
 	wrapper.classList.remove('transition');
 	wrapper.classList.remove('transition-reverse');
 
 	hat.classList.remove('display');
-	hat.classList.remove('drop');
+	hat.classList.remove('drop' + gunmanNumber);
 
 	bkg.classList.remove('shot');
 	bkg.classList.remove('foul');
@@ -392,6 +422,9 @@ function removeBody() {
 	bkg.classList.remove('shot-lose');
 	bkg.classList.remove('shot-foul');
 
+	gunmanNumber = getRandomInRange(1, 5);
+
+	gunman.style.background = 'url(images/g' + gunmanNumber + '.png) left top';
 };
 
 function resetCounters() {
