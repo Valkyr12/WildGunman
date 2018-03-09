@@ -43,7 +43,8 @@ var lifeCount;
 var scoreCount = 0;
 var rewardCount;
 var GAMEOVER;
-// var gunmanSprite = [ 1, 2, 3, 4, 5 ];
+var gunmanSprite = [ 1, 2, 3, 4, 5 ];
+
 var gunmanNumber = 1;
 
 //Helpers
@@ -85,7 +86,7 @@ function calcScores() {
 	score.innerHTML = zero + place;
 }
 
-//Получаем выремя выстрела бандита
+//Получаем время выстрела бандита
 function calcGunmanTime() {
 	var gunmanShotTimes = [ 1.5, 1.3, 1, 0.9, 0.7, 0.5, 0.3 ];
 	var excludeST = [ 2 ];
@@ -422,7 +423,10 @@ function removeBody() {
 	bkg.classList.remove('shot-lose');
 	bkg.classList.remove('shot-foul');
 
-	gunmanNumber = getRandomInRange(1, 5);
+	gunmanNumber += 1;
+	if ( gunmanNumber == 6 ) {
+		gunmanNumber = 1;
+	}
 
 	gunman.style.background = 'url(images/g' + gunmanNumber + '.png) left top';
 };
