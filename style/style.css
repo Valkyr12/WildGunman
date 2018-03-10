@@ -83,7 +83,7 @@ hr {
 }
 
 #header {
-	color: #6AB700;
+	color: green;
 	text-align: center;
 
 }
@@ -93,8 +93,23 @@ hr {
 	margin-bottom: -25px;
 }
 
-#gunman_time {
+#final_score {
+	width: auto;
+	height: 180px;
+	background-color: white;
+	position: absolute;
+	left: 300px;
+	top: 160px;
+	padding: 15px 50px;
+	border-radius: 20px;
+	font-size: 70px;
+	text-align: center;
+	display: none;
+}
 
+#total {
+	font-size: 90px;
+	color: #6AB700;
 }
 
 #player_time, #gunman_time {

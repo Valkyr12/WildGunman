@@ -19,6 +19,8 @@ var wins = document.getElementById('wins');
 var lifes = document.getElementById('lifes');
 var score = document.getElementById('score');
 var gnmTime = document.getElementById('gunman_time');
+var final_score = document.getElementById('final_score');
+var total_score = document.getElementById('total');
 
 //Sounds
 var main_msc = document.getElementById('main');
@@ -73,18 +75,19 @@ function calcReward() {
 }
 
 function calcScores() {
-	var total, zero, place = +score.innerHTML;
-	place += +rewardCount;
+	var zero, total = +score.innerHTML;
+	total += +rewardCount;
 
-	if ( place < 10000 ) {
+	if ( total < 10000 ) {
 		zero = '00';
-	} else if ( place >= 10000 && place < 100000 ) {
+	} else if ( total >= 10000 && total < 100000 ) {
 		zero = '0';
-	} else if ( place >= 100000 ) {
+	} else if ( total >= 100000 ) {
 		zero = '';
 	}
 
-	score.innerHTML = zero + place;
+	score.innerHTML = zero + total;
+	total_score.innerHTML = total;
 }
 
 //Получаем время выстрела бандита
@@ -219,6 +222,7 @@ function startNewGame() {
 	resetCounters();
 	menu.classList.remove('remove');
 	msg_over.classList.remove('display');
+	final_score.classList.remove('display');
 	main_msc.play();
 	GAMEOVER = 0;
 }
@@ -516,6 +520,7 @@ function finishGame() {
 	msg_lost.classList.remove('display');
 	msg_foul.classList.remove('display');
 	msg_over.classList.add('display');
+	final_score.classList.add('display');
 
 	removeBody();
 	gameover.play();
