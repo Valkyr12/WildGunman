@@ -44,6 +44,7 @@ var scoreCount = 0;
 var rewardCount;
 var GAMEOVER;
 var gunmanSprite = [ 1, 2, 3, 4, 5 ];
+var direction = 1;
 
 var gunmanNumber = 1;
 
@@ -227,6 +228,14 @@ function removeMenu() {
 	main_msc.stop();
 	menu.classList.add('remove');
 	firstStart();
+
+	if ( direction == 1) {
+		wrapper.classList.add('right');
+	}
+
+	if ( direction == 2) {
+		wrapper.classList.add('left');
+	}
 }
 
 function firstStart() {
@@ -236,6 +245,14 @@ function firstStart() {
 }
 
 function waitingStart() {
+
+	if ( direction == 1) {
+		wrapper.classList.add('right');
+	}
+
+	if ( direction == 2) {
+		wrapper.classList.add('left');
+	}
 
 	initFire = 1;
 	var outputDelay = function(){
@@ -256,11 +273,16 @@ function goingGunman() {
 
 	reward.innerHTML = rewardCount;
 
+	if ( gunmanNumber == 1 && direction == 2 ) {
+		gunman.classList.add('scale');
+	}
+
 	intro.removeEventListener('ended', goingGunman);
 	walk.play();
 
 	wrapper.classList.add('transition');
 	gunman.classList.add('walk' + gunmanNumber);
+
 	gunman.classList.remove('remove');
 	wrapper.addEventListener('transitionend', turnGunman);
 }
@@ -375,10 +397,26 @@ function goAway() {
 		gunman.style.backgroundPosition = '0px 0';
 		gunman.classList.remove('fire' + gunmanNumber);
 		gunman.classList.remove('lost' + gunmanNumber);
-		gunman.classList.add('goaway');
+
+		if ( gunmanNumber == 1 && direction == 2 ) {
+		gunman.classList.remove('scale');
+	}
+
+		if ( gunmanNumber == 1 && direction == 1 ) {
+			gunman.classList.add('scale');
+		}
+
 		gunman.classList.add('walk' + gunmanNumber);
-		wrapper.style.left = '800px';
-		wrapper.classList.add('transition-reverse');
+		wrapper.classList.remove('transition');
+
+		if ( direction == 2 ) {
+			wrapper.style.left = '100px';
+			wrapper.classList.add('transition-right');
+		} else if ( direction == 1) {
+			wrapper.style.left = '800px';
+			wrapper.classList.add('transition-left');
+		}
+
 		finish = 1;
 		wrapper.addEventListener('transitionend', removeMessages);
 	}, 2500);
@@ -429,10 +467,13 @@ function removeBody() {
 	gunman.style.cssText = '';
 	wrapper.style.cssText = '';
 	gunman.classList.remove('walk' + gunmanNumber);
-	gunman.classList.remove('goaway');
+	gunman.classList.remove('scale');
 	gunman.classList.remove('g' + gunmanNumber +'w');
 	wrapper.classList.remove('transition');
-	wrapper.classList.remove('transition-reverse');
+	wrapper.classList.remove('transition-right');
+	wrapper.classList.remove('transition-left');
+	wrapper.classList.remove('right');
+	wrapper.classList.remove('left');
 
 	hat.classList.remove('display');
 	hat.classList.remove('drop' + gunmanNumber);
@@ -442,6 +483,8 @@ function removeBody() {
 
 	bkg.classList.remove('shot-lose');
 	bkg.classList.remove('shot-foul');
+
+	direction = getRandomInRange(1, 2);
 
 	gunmanNumber += 1;
 	if ( gunmanNumber == 6 ) {
@@ -478,6 +521,8 @@ function finishGame() {
 	gameover.play();
 
 	gameover.addEventListener('ended', startNewGame);
+
+	gunmanNumber = 1;
 
 	return GAMEOVER;
 }

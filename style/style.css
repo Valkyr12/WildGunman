@@ -114,7 +114,15 @@ hr {
   position: absolute;
   top: 120px;
   /*animation: move 3.5s steps(250) forwards;*/
-  left: 800px;
+  /*left: 800px;*/
+}
+
+.left {
+	left: 100px;
+}
+
+.right {
+	left: 800px;
 }
 
 #wrapper.transition {
@@ -123,10 +131,16 @@ hr {
 	left: 425px;
 }
 
-#wrapper.transition-reverse {
+#wrapper.transition-right {
 	transition: 4.5s;
 	transition-timing-function: linear;
 	left: 800px;
+}
+
+#wrapper.transition-left {
+	transition: 4.5s;
+	transition-timing-function: linear;
+	left: 100px;
 }
 
 #gunman {
@@ -295,7 +309,7 @@ hr {
 	animation: gameLost5 1s steps(2) 4 forwards;
 }
 
-#gunman.goaway {
+#gunman.scale {
 	transform: scaleX(-1);
 	/*animation-direction: reverse;*/
 }
