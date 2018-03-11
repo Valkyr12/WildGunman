@@ -96,28 +96,28 @@ function calcScores() {
 
 //Получаем время выстрела бандита
 function calcGunmanTime() {
-	var gunmanShotTimes = [ 1.5, 1.3, 1, 0.9, 0.7, 0.5, 0.3 ];
+	var gunmanShotTimes = [ 1.2, 1, 0.8, 0.6, 0.5, 0.3 ];
 	var excludeST = [];
 	var filteredST = [];
 
 	if ( gunmanNumber == 1 ) {
-		excludeST = [0.7, 0.5, 0.3];
+		excludeST = [0.6, 0.5, 0.3];
 	}
 
 	if ( gunmanNumber == 2 ) {
-		excludeST = [1.5, 0.3];
+		excludeST = [0.3];
 	}
 
 	if ( gunmanNumber == 3 ) {
-		excludeST = [1.5, 0.3];
+		excludeST = [0.3];
 	}
 
 	if ( gunmanNumber == 4 ) {
-		excludeST = [1.5, 1.3];
+		excludeST = [1.2];
 	}
 
 	if ( gunmanNumber == 5 ) {
-		excludeST = [1.5, 1.3, 1, 0.9];
+		excludeST = [1.2, 1, 0.8];
 	}
 
 	for (var i = 0; i < gunmanShotTimes.length; i++) {
@@ -220,6 +220,7 @@ function startGame () {
 };
 
 function startNewGame() {
+	window.location.reload();
 	startGame();
 	clearTime();
 	resetCounters();
@@ -557,10 +558,6 @@ function getMenuPage() {
 	credits_page.classList.remove('display');
 	BJ.stop();
 	main_msc.play();
-	clearTimeout(title);
-};
-
-back_link.onclick = function() {
 	window.location.reload();
 };
 
