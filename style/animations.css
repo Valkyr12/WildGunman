@@ -1,0 +1,315 @@
+/*Animations*/
+@keyframes walk1 { 0% { background-position: 0px 0; } 100% { background-position: -500px 0; } }
+@keyframes fire1 { 0% { background-position: -500px 0; } 100% { background-position: -840px 0; } }
+@keyframes gameLost1 { 0% { background-position: -840px 0; } 100% { background-position: -1180px 0; } }
+@keyframes away1 { 0% { background-position: -500px 0; } 100% { background-position: 0px 0; } }
+
+@keyframes walk2 { 0% { background-position: 0px 0; } 100% { background-position: -444px 0; } }
+@keyframes fire2 { 0% { background-position: 0px 0; } 0.0001% { background-position: -444px 0 } 100% { background-position: -592px 0; } }
+@keyframes gameLost2 { 0% { background-position: -740px 0; } 100% { background-position: -1038px 0; } }
+@keyframes away2 { 0% { background-position: -444px 0; } 100% { background-position: 0px 0; } }
+@keyframes won2 { 0% { background-position: -1184px 0} 100% { background-position: -1184px 0 } }
+
+@keyframes walk3 { 0% { background-position: 0px 0; } 100% { background-position: -408px 0; } }
+@keyframes fire3 { 0% { background-position: 0px 0; } 0.0001% { background-position: -408px 0 } 100% { background-position: -544px 0; } }
+@keyframes gameLost3 { 0% { background-position: -544px 0; } 100% { background-position: -819px 0; } }
+@keyframes away3 { 0% { background-position: -408px 0; } 100% { background-position: 0px 0; } }
+@keyframes won3 { 0% { background-position: -952px 0} 100% { background-position: -952px 0 } }
+
+@keyframes walk4 { 0% { background-position: 0px 0; } 100% { background-position: -510px 0; } }
+@keyframes fire4 { 0% { background-position: 0px 0; } 0.0001% { background-position: -510px 0 } 100% { background-position: -680px 0; } }
+@keyframes gameLost4 { 0% { background-position: -680px 0; } 100% { background-position: -1018px 0; } }
+@keyframes away4 { 0% { background-position: -510px 0; } 100% { background-position: 0px 0; } }
+
+@keyframes walk5 { 0% { background-position: 0px 0; } 100% { background-position: -466px 0; } }
+@keyframes fire5 { 0% { background-position: 0px 0; } 0.0001% { background-position: -463px 0 } 100% { background-position: -624px 0; } }
+@keyframes gameLost5 { 0% { background-position: -618px 0; } 100% { background-position: -925px 0; } }
+@keyframes away5 { 0% { background-position: -466px 0; } 100% { background-position: 0px 0; } }
+
+@keyframes walk { 0% { background-position: 0px 0; left: 0; } 100% { background-position: -235px 0; } }
+@keyframes trans { 0% { left: 0px } 100% { left: 800px; } }
+
+@keyframes won1 {
+    0% {
+        top: 0;
+        background-position: -1346px;
+    }
+    10% {
+        top: -90px;
+    }
+    20% {
+        top: -80px;
+    }
+    30% {
+        top: -70px;
+    }
+
+    50% {
+        top: -60px;
+        background-position: -1520px;
+    }
+
+    70% {
+        top: -50px;
+    }
+    80% {
+        top: -30px;
+    }
+
+    90% {
+        top: -40px;
+        background-position: -1520px;
+    }
+    100% {
+        top: -50px;
+        background-position: -1520px;
+    }
+}
+
+@keyframes won4 {
+    0% {
+        top: -80px;
+        background-position: -1190px;
+    }
+    20% {
+        top: -130px;
+    }
+    30% {
+        top: -80px;
+    }
+
+    50% {
+        top: -50px;
+    }
+    80% {
+        top: -30px;
+    }
+
+    90% {
+        top: -40px;
+    }
+    100% {
+        top: -50px;
+        background-position: -1190px;
+    }
+}
+
+@keyframes won5 {
+    0% {
+        top: 0;
+        background-position: -1080px;
+    }
+    10% {
+        top: -90px;
+    }
+    20% {
+        top: -80px;
+    }
+    30% {
+        top: -70px;
+    }
+
+    50% {
+        top: -60px;
+        background-position: -1234px;
+    }
+
+    70% {
+        top: -50px;
+    }
+    80% {
+        top: -30px;
+    }
+
+    90% {
+        top: -40px;
+    }
+    100% {
+        top: -50px;
+        background-position: -1234px;
+    }
+}
+
+@keyframes hatg1 {
+    0% {
+        top: 0;
+    }
+
+    10% {
+        top: -40px;
+    }
+
+    20% {
+    	top: -25px;
+    }
+
+    30% {
+        top: -40px;
+    }
+
+    40% {
+        top: -25px;
+    }
+
+    50% {
+		top: -40px;
+    }
+
+    60% {
+		top: -25px;
+    }
+
+    70% {
+    	top: 0;
+    }
+
+    80% {
+		top: 120px;
+    }
+
+	90% {
+		top: 110px;
+	}
+
+    100% {
+        top: 120px;
+    }
+}
+
+@keyframes hatg3 {
+    0% {
+        top: -30px;
+    }
+
+    20% {
+    	top: -60px;
+    	left: 125px;
+    }
+
+    30% {
+    	top: -60px;
+		left: 200px;
+    }
+
+    50% {
+        top: 40px;
+		left: 330px;
+    }
+
+    100% {
+        top: 235px;
+        left: 450px;
+    }
+}
+
+@keyframes hatg4 {
+    0% {
+        top: 0;
+    }
+
+    10% {
+        top: -40px;
+    }
+
+    20% {
+    	top: -25px;
+    }
+
+    30% {
+        top: -40px;
+    }
+
+    40% {
+        top: -25px;
+    }
+
+    50% {
+		top: -40px;
+    }
+
+    60% {
+		top: -25px;
+    }
+
+    70% {
+    	top: 0;
+    }
+
+    80% {
+		top: 70px;
+    }
+
+	90% {
+		top: 55px;
+	}
+
+    100% {
+        top: 70px;
+    }
+}
+
+@keyframes hatg5 {
+    0% {
+        top: 0;
+    }
+
+    10% {
+        top: -40px;
+    }
+
+    20% {
+    	top: -25px;
+    }
+
+    30% {
+        top: -40px;
+    }
+
+    40% {
+        top: -25px;
+    }
+
+    50% {
+		top: -40px;
+    }
+
+    60% {
+		top: -25px;
+    }
+
+    70% {
+    	top: 0;
+    }
+
+    80% {
+		top: 140px;
+    }
+
+	90% {
+		top: 120px;
+	}
+
+    100% {
+        top: 140px;
+    }
+}
+
+@keyframes bkgBlink {
+    from {
+        background-image: url('../images/bg.png');
+    }
+    to {
+        background-color: rgba(250, 0, 100, 0.8);
+
+        background-blend-mode: luminosity;
+    }
+}
+
+@keyframes blink {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;finish = 1;
+	}
+}

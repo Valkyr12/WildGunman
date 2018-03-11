@@ -22,6 +22,11 @@ var gnmTime = document.getElementById('gunman_time');
 var final_score = document.getElementById('final_score');
 var total_score = document.getElementById('total');
 
+var credits_link = document.getElementById('credits_link');
+var credits_page = document.getElementById('credits');
+var back_link = document.getElementById('back_link');
+var credits_text = document.getElementById('credits_text');
+
 //Sounds
 var main_msc = document.getElementById('main');
 var intro = document.getElementById('intro');
@@ -35,6 +40,7 @@ var shot = document.getElementById('shot');
 var shot_alt = document.getElementById('shot-alt');
 var shot_fall = document.getElementById('shot-fall');
 var gameover = document.getElementById('gameover');
+var BJ = document.getElementById('BJ');
 
 //Variables
 var fireRange = getRandomInRange(1000, 3000);
@@ -47,32 +53,30 @@ var rewardCount;
 var GAMEOVER;
 var gunmanSprite = [ 1, 2, 3, 4, 5 ];
 var direction = 1;
-
 var gunmanNumber = 1;
 
 //Helpers
 HTMLAudioElement.prototype.stop = function() {
 	this.pause();
 	this.currentTime = 0.0;
-}
+};
 
 function getRandomInRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
 
 function getRandom(min, max) {
   return Math.random() * (max - min + 1) + min;
-}
+};
 
 function roundTo100(num) {
 	return Math.round( num / 100 ) * 100;
-}
+};
 
 function calcReward() {
 	rewardCount = Math.floor( 2000 / gunmanTime );
-
 	rewardCount = roundTo100(rewardCount);
-}
+};
 
 function calcScores() {
 	var zero, total = +score.innerHTML;
@@ -88,7 +92,7 @@ function calcScores() {
 
 	score.innerHTML = zero + total;
 	total_score.innerHTML = total;
-}
+};
 
 //Получаем время выстрела бандита
 function calcGunmanTime() {
@@ -125,7 +129,7 @@ function calcGunmanTime() {
 	gunmanTime = filteredST[Math.floor(Math.random() * filteredST.length)];
 	var fixedTime = gunmanTime.toFixed(2);
 	gnmTime.innerHTML = fixedTime;
-}
+};
 
 //Timers
 var init = 0;
@@ -161,15 +165,14 @@ function stopTime() {
 		msg_fire.classList.remove('display');
 		foulGame();
 	}
-}
+};
 
 function clearTime() {
 	playerTime.innerHTML = '0.00';
 	clearTimeout(clocktimer);
 	startDate = undefined;
 	finalTime = undefined;
-	// stopTime();
-}
+};
 
 function findTime() {
 	var thisDate = new Date();
@@ -196,7 +199,7 @@ function findTime() {
 	}
 
 	clocktimer = setTimeout(findTime, 10);
-}
+};
 
 function startTime() {
 	if ( init == 0 ) {
@@ -206,7 +209,7 @@ function startTime() {
 	} else {
 		stopTime();
 	}
-}
+};
 
 //Functions
 function startGame () {
@@ -214,7 +217,7 @@ function startGame () {
 	lifeCount = 3;
 	lifes.innerHTML = lifeCount;
 	start.addEventListener('click', removeMenu);
-}
+};
 
 function startNewGame() {
 	startGame();
@@ -225,7 +228,7 @@ function startNewGame() {
 	final_score.classList.remove('display');
 	main_msc.play();
 	GAMEOVER = 0;
-}
+};
 
 function removeMenu() {
 	start.removeEventListener('click', removeMenu);
@@ -240,13 +243,13 @@ function removeMenu() {
 	if ( direction == 2) {
 		wrapper.classList.add('left');
 	}
-}
+};
 
 function firstStart() {
 	initFire = 1;
 	intro.play();
 	intro.addEventListener('ended', goingGunman);
-}
+};
 
 function waitingStart() {
 
@@ -266,7 +269,7 @@ function waitingStart() {
 			setTimeout(goingGunman, 2000);
 		}
 	}();
-}
+};
 
 function goingGunman() {
 	gunman.classList.add('g' + gunmanNumber +'w');
@@ -289,7 +292,7 @@ function goingGunman() {
 
 	gunman.classList.remove('remove');
 	wrapper.addEventListener('transitionend', turnGunman);
-}
+};
 
 function turnGunman() {
 
@@ -310,7 +313,7 @@ function turnGunman() {
 	wait.play();
 
 	var shootTimer = setTimeout(getFire, fireRange);
-}
+};
 
 function getFire() {
 	if ( initFire == 1 ) {
@@ -325,7 +328,7 @@ function getFire() {
 	} else {
 		return;
 	}
-}
+};
 
 //Game results
 function winGame() {
@@ -351,7 +354,7 @@ function winGame() {
 	calcScores();
 
 	hat.addEventListener('animationend', restartGame);
-}
+};
 
 function loseGame() {
 	shot.play();
@@ -368,7 +371,7 @@ function loseGame() {
 	finish = 1;
 
 	goAway();
-}
+};
 
 function foulGame() {
 	foul.play();
@@ -386,7 +389,7 @@ function foulGame() {
 	wait.stop();
 
 	goAway();
-}
+};
 
 function checkLifes() {
 	if( lifeCount <= 0 ) {
@@ -394,7 +397,7 @@ function checkLifes() {
 	}
 
 	return;
-}
+};
 
 function goAway() {
 	setTimeout(function() {
@@ -427,7 +430,7 @@ function goAway() {
 
 	gunman.classList.remove('cursor');
 	lose.addEventListener('ended', restartGame);
-}
+};
 
 function restartGame() {
 	checkLifes();
@@ -453,7 +456,7 @@ function removeMessages() {
 	msg_lost.classList.remove('display');
 	msg_foul.classList.remove('display');
 	msg_fire.classList.remove('display');
-// debugger;
+
 	wrapper.addEventListener('transitionend', checkLifes);
 	hat.classList.remove('unvisible');
 
@@ -507,7 +510,7 @@ function resetCounters() {
 	score.innerHTML = '000000';
 	wins.innerHTML = '0';
 	gnmTime.innerHTML = '0.00';
-}
+};
 
 function finishGame() {
 	GAMEOVER = 1;
@@ -530,7 +533,36 @@ function finishGame() {
 	gunmanNumber = 1;
 
 	return GAMEOVER;
-}
+};
+
+//Credits
+credits_link.addEventListener('click', getCreditPage);
+back_link.addEventListener('click', getMenuPage);
+
+function getCreditPage() {
+	credits_page.classList.add('display');
+	main_msc.stop();
+	BJ.play();
+
+		var k = -1250;
+	    function title(){
+	        credits_text.style.bottom = ( ++k < 1250 ) ? k +'px' : k = -1250;
+	        setTimeout(title, 50);
+	    };
+
+	    title();
+};
+
+function getMenuPage() {
+	credits_page.classList.remove('display');
+	BJ.stop();
+	main_msc.play();
+	clearTimeout(title);
+};
+
+back_link.onclick = function() {
+	window.location.reload();
+};
 
 //Onload
 window.onload = startGame();

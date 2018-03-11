@@ -5,12 +5,14 @@
 	<title>Document</title>
 	<link href="https://fonts.googleapis.com/css?family=Smokum" rel="stylesheet">
 	<link rel="stylesheet" href="style/style.css">
+	<link rel="stylesheet" href="style/animations.css">
 </head>
 <body>
 	<div id="playing_field">
 		<div id="menu">
 			<h1>WILD GUNMAN</h1>
 			<span id="start_game">START GAME</span>
+			<p id="credits_link">CREDITS</p>
 		</div>
 			<div id="header">
 				<p>TIME.YOU: <span id="player_time">0.00</span></p>
@@ -46,7 +48,36 @@
 					<p>SCORE</p>
 				</div>
 			</div>
+
+		<div id="credits">
+			<div id="credits_text">
+				<h1>От автора</h1>
+				<p>
+					Эта игра была написана холодными весенними российскими вечерами в рамках финального проекта обучающего курса по JavaScript от организации GoIT. Автор выражает искреннюю благодарность всем причастным к составлению данного курса, в особенности его ведущему – Сергею Пузанкову.
+				</p>
+				<p>
+					Так же, хотелось бы сказать спасибо моей жене, за терпение и моральную поддержку в течение всего курса и помощь в тестировании финального проекта. Спасибо, родная моя, я тебя люблю! :)
+				</p>
+				<p>
+					Спасибо моему начальнику, за предоставленное время для освоения данного курса.
+				</p>
+				<p>
+					Спасибо моей импровизированной команде тестировщиков. Вы не знали о том, что вас много и вы команда, но как-то так оно и было :)
+				</p>
+				<p>
+					Отдельное спасибо компании «Скобеев и Партнеры» за любезно предоставленную мотивацию!
+				</p>
+				<p>
+					Всем мир!
+				</p>
+				<p>Тамбов 2018</p>
+			</div>
+			<span id="back_link">MENU</span>
+			<div id="MJ" class="mj-left walk"></div>
+		</div>
+
 	</div>
+
 
 	<audio src="audio/main.m4a" id="main" autoplay loop></audio>
 	<audio src="audio/intro.m4a" id="intro"></audio>
@@ -60,6 +91,7 @@
 	<audio src="audio/win.m4a" id="win"></audio>
 	<audio src="audio/foul.m4a" id="foul"></audio>
 	<audio src="audio/gameover.m4a" id="gameover"></audio>
+	<audio src="audio/BJ.mp3" id="BJ" loop></audio>
 
 
 	<script src="script/script.js"></script>
